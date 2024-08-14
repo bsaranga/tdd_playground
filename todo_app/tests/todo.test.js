@@ -42,3 +42,65 @@ test('Each created task has a unique id', () => {
     expect(tasks[1].id).toBeUUID();
     expect(tasks[0].id).not.toBe(tasks[1].id);
 })
+
+test('Todo manager can remove a task by id', () => {
+    const todoManager = new TodoManager(new TaskRepsository());
+    
+    todoManager.addTask('title', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
+    todoManager.addTask('title', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
+    
+    const tasks = todoManager.getAllTasks();
+    const id = tasks[0].id;
+    todoManager.removeTask(id);
+    expect(todoManager.getAllTasks().length).toBe(1);
+    expect(todoManager.getAllTasks()[0].id).not.toBe(id);
+})
+
+test('Todo manager can edit a task by id', () => {
+    const todoManager = new TodoManager(new TaskRepsository());
+    
+    todoManager.addTask('title', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
+    todoManager.addTask('title', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
+    
+    const tasks = todoManager.getAllTasks();
+    const id = tasks[0].id;
+    todoManager.editTask(id, 'new title', 'new description', new Date(2024, 8, 15, 5, 55, 0), 'low');
+    expect(todoManager.getAllTasks()[0].title).toBe('new title');
+    expect(todoManager.getAllTasks()[0].description).toBe('new description');
+    expect(todoManager.getAllTasks()[0].dueDate).toEqual(new Date(2024, 8, 15, 5, 55, 0));
+    expect(todoManager.getAllTasks()[0].priority).toBe('low');
+})
+
+test('Check if a task is expired', () => {
+    const todoManager = new TodoManager(new TaskRepsository());
+    
+    todoManager.addTask('title', 'this is the description', new Date(2020, 8, 15, 5, 55, 0), 'high');
+    todoManager.addTask('title', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
+    
+    const tasks = todoManager.getAllTasks();
+    expect(tasks[0].isExpired()).toBe(true);
+    expect(tasks[1].isExpired()).toBe(false);
+})
+
+test('Todo manager can mark a task as done', () => {
+    const todoManager = new TodoManager(new TaskRepsository());
+    
+    todoManager.addTask('title', 'this is the description', new Date(2020, 8, 15, 5, 55, 0), 'high');
+    todoManager.addTask('title', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
+    
+    const tasks = todoManager.getAllTasks();
+    todoManager.markAsDone(tasks[0].id);
+    expect(todoManager.getAllTasks()[0].isComplete()).toBe(true);
+    expect(todoManager.getAllTasks()[1].isComplete()).toBe(false);
+});
+
+test('Todo manager can get a task by id', () => {
+    const todoManager = new TodoManager(new TaskRepsository());
+    
+    todoManager.addTask('title', 'this is the description', new Date(2020, 8, 15, 5, 55, 0), 'high');
+    todoManager.addTask('title', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
+    
+    const tasks = todoManager.getAllTasks();
+    const id = tasks[0].id;
+    expect(todoManager.getTaskById(id)).toBe(tasks[0]);
+})
