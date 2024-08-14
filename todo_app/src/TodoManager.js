@@ -12,7 +12,7 @@ export default class TodoManager {
         return this.#taskRepository.getAllTasks();
     }
 
-    addTask(taskName, description, dueDate, priority) {
-        this.#taskRepository.addTask(new Task(taskName, description, dueDate, priority));
+    addTask(title, description, dueDate, priority) {
+        this.#taskRepository.addTask(new Task(title, description, dueDate, priority));
     }
 }
