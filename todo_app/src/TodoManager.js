@@ -31,4 +31,12 @@ export default class TodoManager {
     markAsDone(id) {
         this.#taskRepository.markAsDone(id);
     }
+
+    markAsUndone(id) {
+        this.#taskRepository.markAsUndone(id);
+    }
+
+    searchTasksByTitle(title) {
+        return this.#taskRepository.filterByTitle(title);
+    }
 }

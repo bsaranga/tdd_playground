@@ -31,4 +31,13 @@ export default class TaskRepsository {
         const task = this.tasks.find(task => task.id === id);
         task.done = true;
     }
+
+    markAsUndone(id) {
+        const task = this.tasks.find(task => task.id === id);
+        task.done = false;
+    }
+
+    filterByTitle(title) {
+        return this.tasks.filter(task => task.title.toLowerCase().includes(title.toLowerCase()));
+    }
 }
