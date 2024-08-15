@@ -46,5 +46,8 @@ describe('Task creation and deletion', () => {
     cy.get('#taskList').children().first().children().eq(2).should('have.text', 'Fri Dec 31 2021 at 12:00 AM');
     cy.get('#taskList').children().first().children().eq(3).should('have.text', 'High');
     cy.get('#taskList').children().first().children().eq(4).should('have.text', 'Delete');
+
+    cy.get('#taskList').children().first().children().eq(4).click();
+    cy.get('#taskList').children().should('have.length', 0);
   });
 });
