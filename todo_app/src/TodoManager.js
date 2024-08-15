@@ -1,6 +1,6 @@
-import Task from "./Task";
+const Task = require('./Task');
 
-export default class TodoManager {
+class TodoManager {
     
     #taskRepository;
     
@@ -40,3 +40,5 @@ export default class TodoManager {
         return this.#taskRepository.filterByTitle(title);
     }
 }
+
+module.exports = TodoManager;

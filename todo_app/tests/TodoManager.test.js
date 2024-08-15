@@ -1,6 +1,6 @@
-import TodoManager from '../src/TodoManager';
-import TaskRepsository from '../src/TaskRepository';
-import uuid_matcher from '../extensions/jest_uuidmatcher';
+const TodoManager = require('../src/TodoManager');
+const TaskRepsository = require('../src/TaskRepository');
+const uuid_matcher = require('../extensions/jest_uuidmatcher');
 
 expect.extend(uuid_matcher);
 

@@ -1,4 +1,4 @@
-export default class TaskRepsository {
+class TaskRepsository {
     constructor() {
         this.tasks = [];
     }
@@ -41,3 +41,5 @@ export default class TaskRepsository {
         return this.tasks.filter(task => task.title.toLowerCase().includes(title.toLowerCase()));
     }
 }
+
+module.exports = TaskRepsository;

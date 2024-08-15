@@ -4,14 +4,9 @@
  * Module dependencies.
  */
 
-var hmr = require('node-hmr');
-var app;
+var app = require('../app');
 var debug = require('debug')('todo-app:server');
 var http = require('http');
-
-hmr(() => {
-  app = require('../app');
-}, { watchDir: '../', watchFilePatterns: ['**/*.js', '**/*.hbs']});
 
 /**
  * Get port from environment and store in Express.

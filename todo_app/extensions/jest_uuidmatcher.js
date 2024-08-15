@@ -17,4 +17,4 @@ const uuid_matcher = {
     },
 }
 
-export default uuid_matcher;
+module.exports = uuid_matcher;
