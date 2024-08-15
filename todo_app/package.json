@@ -3,24 +3,22 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www -w ./",
-    "test": "jest",
-    "cy:open": "cypress open"
+    "todoapi": "nodemon ./todo_api/bin/www -w ./todo_api",
+    "test": "jest"
   },
   "dependencies": {
+    "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.12",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.4",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.25.2",
-    "@babel/preset-env": "^7.25.3",
-    "babel-jest": "^29.7.0",
-    "cypress": "^13.13.3",
     "jest": "^29.7.0"
   }
 }
