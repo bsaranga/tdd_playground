@@ -11,10 +11,9 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  console.log(req.body);
   const dueDate = createDate(req.body.dueDate, req.body.time);
   todoManager.addTask(req.body.title, req.body.description, dueDate, req.body.priority);
-  res.render('index', { tasks: todoManager.getAllTasks() });
+  res.render('index', { tasks: todoManager.getAllTasks().map(t => t.toDto()) });
 });
 
 module.exports = router;

@@ -1,9 +1,3 @@
-describe('Visits todo application on localhost', () => {
-  it('passes', () => {
-    cy.visit('http://localhost:3000')
-  })
-})
-
 describe('Task prerequisites', () => {
   it('Task form is present', () => {
     cy.visit('http://localhost:3000')
@@ -46,11 +40,10 @@ describe('Task creation', () => {
     cy.get('#taskInputForm button[type="submit"]').click()
 
     cy.get('#taskList').children().should('have.length', 1);
-    cy.get('#taskList').children().first().children().should('have.length', 5);
+    cy.get('#taskList').children().first().children().should('have.length', 4);
     cy.get('#taskList').children().first().children().eq(0).should('have.text', 'Task 1');
     cy.get('#taskList').children().first().children().eq(1).should('have.text', 'Task 1 description');
-    cy.get('#taskList').children().first().children().eq(2).should('have.text', '2021-12-31');
-    cy.get('#taskList').children().first().children().eq(3).should('have.text', '12:00');
-    cy.get('#taskList').children().first().children().eq(4).should('have.text', 'High');
+    cy.get('#taskList').children().first().children().eq(2).should('have.text', 'Fri Dec 31 2021 at 12:00 AM');
+    cy.get('#taskList').children().first().children().eq(3).should('have.text', 'High');
   });
 });

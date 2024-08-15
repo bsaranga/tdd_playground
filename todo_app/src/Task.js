@@ -1,4 +1,5 @@
 const { v4: uuidv4 } = require('uuid');
+const TaskDto = require('./dtos/TaskDto');
 
 class Task {
 
@@ -17,6 +18,10 @@ class Task {
 
     isComplete() {
         return this.done;
+    }
+
+    toDto() {
+        return new TaskDto(this.id, this.title, this.description, this.dueDate, this.priority, this.done);
     }
 }
 
