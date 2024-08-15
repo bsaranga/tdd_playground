@@ -10,6 +10,11 @@ class TodoManagerSingleton {
         }
         return this.instance;
     }
+
+    static resetInstance() {
+        console.log('Resetting TodoManagerSingleton instance');
+        this.instance = null;
+    }
 }
 
 module.exports = TodoManagerSingleton;

@@ -2,23 +2,23 @@
 <form id="taskInputForm" action="/" method="post">
     <div>
         <label for="title">Title</label>
-        <input type="text" name="title" />
+        <input type="text" name="title" required />
     </div>
     <div>
         <label for="description">Description</label>
-        <input type="text" name="description" />
+        <input type="text" name="description" required />
     </div>
     <div>
         <label for="dueDate">Due Date</label>
-        <input type="date" name="dueDate" />
+        <input type="date" name="dueDate" required />
     </div>
     <div>
         <label for="time">Time</label>
-        <input type="time" name="time" />
+        <input type="time" name="time" required />
     </div>
     <div>
         <label for="priority">Priority</label>
-        <select name="priority">
+        <select name="priority" required>
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
             <option value="High">High</option>
@@ -30,11 +30,12 @@
 <div>Tasks</div>
 <div id="taskList">
 {{#each tasks}}
-    <div>
+    <div id={{id}}>
         <p>{{title}}</p>
         <p>{{description}}</p>
         <p>{{dueDate}}</p>
         <p>{{priority}}</p>
+        <button>Delete</button>
     </div>
 {{/each}}
 </div>
