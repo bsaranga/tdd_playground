@@ -6,7 +6,7 @@ const todoManager = TodoManagerSingleton.getInstance();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.json({tasks: []})
+  res.status(200).json({tasks: []})
 });
 
 module.exports = router;
