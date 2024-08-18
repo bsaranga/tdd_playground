@@ -12,7 +12,6 @@ class TodoManagerSingleton {
     }
 
     static resetInstance() {
-        console.log('Resetting TodoManagerSingleton instance');
         this.instance = null;
     }
 }

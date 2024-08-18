@@ -40,6 +40,10 @@ class TaskRepsository {
     filterByTitle(title) {
         return this.tasks.filter(task => task.title.toLowerCase().includes(title.toLowerCase()));
     }
+
+    existsByTitle(title) {
+        return this.tasks.some(task => task.title.toLowerCase() === title.toLowerCase());
+    }
 }
 
 module.exports = TaskRepsository;

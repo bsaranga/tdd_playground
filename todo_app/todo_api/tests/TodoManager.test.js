@@ -31,11 +31,19 @@ test('Todo manager can add a task from base parameters', () => {
     expect(task.priority).toBe(priority);
 })
 
+test('If a task by name already exists, an exception is thrown', () => {
+    const todoManager = new TodoManager(new TaskRepsository());
+    
+    todoManager.addTask('title', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
+    
+    expect(() => todoManager.addTask('title', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high')).toThrow('Task with title already exists');
+})
+
 test('Each created task has a unique id', () => {
     const todoManager = new TodoManager(new TaskRepsository());
     
     todoManager.addTask('title', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
-    todoManager.addTask('title', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
+    todoManager.addTask('title2', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
     
     const tasks = todoManager.getAllTasks();
     expect(tasks[0].id).toBeUUID();
@@ -47,7 +55,7 @@ test('Todo manager can remove a task by id', () => {
     const todoManager = new TodoManager(new TaskRepsository());
     
     todoManager.addTask('title', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
-    todoManager.addTask('title', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
+    todoManager.addTask('title2', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
     
     const tasks = todoManager.getAllTasks();
     const id = tasks[0].id;
@@ -60,7 +68,7 @@ test('Todo manager can edit a task by id', () => {
     const todoManager = new TodoManager(new TaskRepsository());
     
     todoManager.addTask('title', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
-    todoManager.addTask('title', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
+    todoManager.addTask('title2', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
     
     const tasks = todoManager.getAllTasks();
     const id = tasks[0].id;
@@ -75,7 +83,7 @@ test('Check if a task is expired', () => {
     const todoManager = new TodoManager(new TaskRepsository());
     
     todoManager.addTask('title', 'this is the description', new Date(2020, 8, 15, 5, 55, 0), 'high');
-    todoManager.addTask('title', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
+    todoManager.addTask('title2', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
     
     const tasks = todoManager.getAllTasks();
     expect(tasks[0].isExpired()).toBe(true);
@@ -86,7 +94,7 @@ test('Todo manager can mark a task as done', () => {
     const todoManager = new TodoManager(new TaskRepsository());
     
     todoManager.addTask('title', 'this is the description', new Date(2020, 8, 15, 5, 55, 0), 'high');
-    todoManager.addTask('title', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
+    todoManager.addTask('title2', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
     
     const tasks = todoManager.getAllTasks();
     todoManager.markAsDone(tasks[0].id);
@@ -98,7 +106,7 @@ test('Todo manager can get a task by id', () => {
     const todoManager = new TodoManager(new TaskRepsository());
     
     todoManager.addTask('title', 'this is the description', new Date(2020, 8, 15, 5, 55, 0), 'high');
-    todoManager.addTask('title', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
+    todoManager.addTask('title2', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
     
     const tasks = todoManager.getAllTasks();
     const id = tasks[0].id;
@@ -109,7 +117,7 @@ test('Todo manager can search for a task by title', () => {
     const todoManager = new TodoManager(new TaskRepsository());
     
     todoManager.addTask('this is a peculiar title', 'this is the description', new Date(2020, 8, 15, 5, 55, 0), 'high');
-    todoManager.addTask('title', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
+    todoManager.addTask('title2', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
     
     const tasks = todoManager.getAllTasks();
     const title = tasks[0].title;
@@ -123,7 +131,7 @@ test('Todo manager can mark a task as undone', () => {
     const todoManager = new TodoManager(new TaskRepsository());
     
     todoManager.addTask('title', 'this is the description', new Date(2020, 8, 15, 5, 55, 0), 'high');
-    todoManager.addTask('title', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
+    todoManager.addTask('title2', 'this is the description', new Date(2024, 8, 15, 5, 55, 0), 'high');
     
     const tasks = todoManager.getAllTasks();
     todoManager.markAsDone(tasks[0].id);

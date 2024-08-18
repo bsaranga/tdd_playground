@@ -17,6 +17,11 @@ class TodoManager {
     }
 
     addTask(title, description, dueDate, priority) {
+        if (this.#taskRepository.existsByTitle(title)) {
+            const error = new Error('Task with title already exists');
+            error.name = 'TaskAlreadyExistsError';
+            throw error;
+        }
         this.#taskRepository.addTask(new Task(title, description, dueDate, priority));
     }
 
