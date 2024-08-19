@@ -94,7 +94,7 @@ router.patch('/tasks/:id', function(req, res, next) {
       todoManager.markAsUndone(id);
     }
 
-    res.status(200).json(todoManager.getTaskById(id));
+    res.status(200).json(todoManager.getAllTasks());
 
   } catch (error) {
     

@@ -1,20 +1,12 @@
 import { useEffect, useState } from 'react'
 import config from '../config'
-import './App.css'
+import ITask from './types/ITask'
+import Task from './components/Task'
 
 const { todoApi } = config
 
-interface Task {
-  id: number
-  title: string
-  description: string
-  done: boolean
-  dueDate: string
-  priority: 'High' | 'Medium' | 'Low'
-}
-
 function App() {
-  const [tasks, setTasks] = useState<Task[]>([])
+  const [tasks, setTasks] = useState<ITask[]>([])
   
   useEffect(() => {
     fetch(`${todoApi}/tasks`)
@@ -33,21 +25,34 @@ function App() {
         }
       })
   }
+
+  function handleDone(id: number, doneState: boolean) {
+    fetch(`${todoApi}/tasks/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ done: doneState }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data) {
+          setTasks(data)
+        }
+      })
+  }
   
   return (
-    <>
+    <div className='flex flex-col gap-2'>
       {
+        tasks.length == 0 ? <div>No Tasks</div> :
         tasks.map(t => {
           return (
-            <div key={t.id}>
-              <h3>{t.title}</h3>
-              <p>{t.description}</p>
-              <button onClick={() => handleDelete(t.id)}>Delete</button>
-            </div>
+            <Task task={t} handleDelete={handleDelete} handleDone={handleDone} key={t.id} />
           )
         })
       }
-    </>
+    </div>
   )
 }
 
